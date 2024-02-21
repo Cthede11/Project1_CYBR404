@@ -1,0 +1,23 @@
+Project Objectives
+- creating requiremnts with client
+- creating database
+- adding in required features
+- bug fixes
+
+ Scope
+ - WE WILL
+    - Design and impliment a small database
+    - Design and impliment a GUI or dashboard for the user to use with the database
+    - Impliment a backup database file
+
+- WE WILL NOT
+    - Design for multiple unique systems
+    - Connect the system to the internet
+    - Design a customer-end GUI
+    - Impliment an order management system
+    - We will not provide maintenence for longer than 1 week
+
+ Expectations
+    - A working database system with interface
+    - A short presentation/demo to review with client
+

@@ -1,0 +1,16 @@
+Problem
+- The problem to be solved is an issue of management
+- We will be focusing on a mechanic shop and their managment of inventory
+
+Process
+- We will meat with the client during every phase to discuss requirements
+- Interface design
+- Building the database
+- Adding features
+- Bug fixes and final touches
+
+Solution
+- Our solution will be a database that will allow the management (adding and removing) of items (parts) in the database. 
+
+Expected Deliverables
+- The deliverables should include an interface that will allow the user to access and manage a database, the database itself.
