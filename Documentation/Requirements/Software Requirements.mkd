@@ -1,0 +1,3 @@
+Software Requirement
+    - SQL
+    - Java
