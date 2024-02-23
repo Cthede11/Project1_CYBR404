@@ -1,6 +1,5 @@
 SECURITY OUTCOMES
 - The creation of backup files.
-- Daily report of changes made to inventory.
 - Login screen with username & password required.
 - Ability to update passwords.
 - Encryption and safe storage of data.
