@@ -1,12 +1,10 @@
 SECURITY OUTCOMES
 - The creation of backup files.
-- Daily report of changes made to inventory.
 - Login screen with username & password required.
 - Ability to update passwords.
 - Encryption and safe storage of data.
 - No connection to outside sources (aka no wifi or uploads to the internet or any external device).
 - Only on the single device used at mechanic shop.
-- Additions/Removals are marked with username of the current user.
 
 By implementing said security outcomes, we can best protect the shop's valuable data about inventory
  while also making sure if any potential errors occur that the system can be quickly and safely
