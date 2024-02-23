@@ -1,0 +1,10 @@
+##Expected Outcome Details
+- The coding of a graphical user interface will be developed in the Java programming language.
+- Connections to a database will be made to interact with the Java GUI.
+- The GUI will provide the user a scrollable list containing their inventory.
+- Each part on the list will provide its part name, number, price, and quantity.
+- A search bar/TextField will be implemented to quickly find desired parts on hand.
+- The user will be able to manually add & delete from inventory.
+
+##Final Product Overview
+  The final product is intended to help manage mechanical parts located within the mechanics shop. This is done with our Java GUI which interacts with a secure database to easily view and edit parts on hand.
