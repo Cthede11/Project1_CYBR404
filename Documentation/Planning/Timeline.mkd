@@ -1,7 +1,0 @@
-milestone
-- dashboard
-database
-login screen
-encryption
-backup files
-finish documentation
