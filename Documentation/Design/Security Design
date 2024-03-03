@@ -1,5 +1,5 @@
 There are a few key security controls that are being implemented into the inventory
-managment program. First is the implementation of requiring a username and passoword
+managment program. First is the implementation of requiring a username and password
 in order to access the database and its contents. These two pieces of data will be
 stored, with the password being encrypted using SHA-456 and stored in a shadow file.
 The database itself will also be encrypted, using a key that is based around each
