@@ -2,7 +2,39 @@ Describe the design you are going to pursue. Include the different components,
 processes, entities, data stores, and data flows that will be involved.
 
 We are going to persue an object oriented design that includes the following classes:
+Start()
+Encrypt()
+Decrypt()
+Handle()
+Inventory()
+Update()
+Create()
+Delete()
 
 Our design will include the following objects:
+appLabel
+usernameTF
+searchTF
+passwordTF
+table
+loginButton
+createButton
+removeButton
+editMButton
+separator
+username
+password
+partName
+partNumber
+partQuantity
+deleteByPartNumber
+itemQuantity
 
 The difference entities/components, etc. involved will include:
+User
+Login Verification
+Dashboard
+Inventory Manager
+Database
+Inventory Backup
+Login Storage
