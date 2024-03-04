@@ -25,9 +25,9 @@ public class Main extends Application {
 
     Label appLabel;
     TextField usernameTF, searchTF;
-    JTextField partNameTF, partNumberTF, partQuantityTF;
+    JTextField partNameTF, partNumberTF, partQuantityTF, partNumberDeleteTF;
     PasswordField passwordTF;
-    Button loginButton, createButton, removeButton;
+    Button loginButton, updateButton, searchButton;
     MenuButton editMButton;
     Separator separator;
 
@@ -44,17 +44,18 @@ public class Main extends Application {
     public void start (Stage primaryStage)
     {
         appLabel = new Label("Zebras in Pajamas");
-        searchTF = new TextField("Search");
+        searchTF = new TextField();
         usernameTF = new TextField("username");
         passwordTF = new PasswordField();
 
         partNameTF = new JTextField("Name");
         partNumberTF = new JTextField("Part Number");
+        partNumberDeleteTF = new JTextField("Part Number");
         partQuantityTF = new JTextField("Qty");
 
         loginButton = new Button("Login");
-        createButton = new Button("Create");
-        removeButton = new Button("Remove");
+        updateButton = new Button("Update");
+        searchButton = new Button("Search");
         editMButton = new MenuButton("Edit");
         separator = new Separator();
 
@@ -64,6 +65,9 @@ public class Main extends Application {
         createPanel.add(partNameTF);
         createPanel.add(partNumberTF);
         createPanel.add(partQuantityTF);
+
+        JPanel deletePanel = new JPanel();
+        deletePanel.add(partNumberDeleteTF);
 
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
@@ -152,7 +156,7 @@ public class Main extends Application {
                         partQuantityColumn.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("partQuantity"));
     //Columns are added to the table and then populated with the connect method
                         inventoryTable.getColumns().addAll(partNameColumn, partNumberColumn, partQuantityColumn);
-                        DatabaseConnection.Connect(inventoryTable);
+                        DatabaseConnection.Populate(inventoryTable);
 
                         final GridPane gridpane2 = new GridPane();
 
@@ -163,10 +167,12 @@ public class Main extends Application {
 
                         editMButton.getItems().addAll(createItem, deleteItem);
 
-                        gridpane2.add(appLabel,0,0);
-                        gridpane2.add(searchTF,0,1);
-                        gridpane2.add(inventoryTable,0,2);
+                        gridpane2.add(appLabel,1,0);
+                        gridpane2.add(searchTF,1,1);
+                        gridpane2.add(inventoryTable,1,2);
                         gridpane2.add(editMButton,0,4);
+                        gridpane2.add(searchButton, 2, 1);
+                        gridpane2.add(updateButton, 2, 4);
 
                         Scene inventoryScene = new Scene(gridpane2);
                         primaryStage.setScene(inventoryScene);
@@ -192,15 +198,26 @@ public class Main extends Application {
                 int userOption = createWindow.showConfirmDialog(dialog, createPanel, "Create Item", JOptionPane.OK_CANCEL_OPTION);
 //Print statements were for testing, will add functionality to add data to table.
                 if (userOption == JOptionPane.OK_OPTION) {
-                    DatabaseConnection.CreateRow(partNameTF, partNumberTF, partQuantityTF);
-                    System.out.println(partNameTF.getText());
-                    System.out.println(partNumberTF.getText());
-                    System.out.println(partQuantityTF.getText());
+                    DatabaseConnection.CreateRow(inventoryTable, partNameTF, partNumberTF, partQuantityTF);
                 }
 
             }
         }
         createItem.setOnAction(new CreateEvent());
 
+        class DeleteEvent implements EventHandler<ActionEvent> {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                int userOption = createWindow.showConfirmDialog(dialog, deletePanel, "Delete Item", JOptionPane.OK_CANCEL_OPTION);
+
+                if (userOption == JOptionPane.OK_OPTION) {
+                    int confirmUserOption = createWindow.showConfirmDialog(dialog, "Are you sure?\nThere WILL BE consequences!", "Confirm Action", JOptionPane.YES_NO_OPTION);
+                    if (confirmUserOption == JOptionPane.YES_OPTION)
+                    DatabaseConnection.DeleteRow(inventoryTable, partNumberDeleteTF);
+                }
+            }
+        }
+        deleteItem.setOnAction(new DeleteEvent());
     }
 }
