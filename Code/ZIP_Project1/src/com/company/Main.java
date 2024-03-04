@@ -13,6 +13,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 public class Main extends Application {
 
@@ -41,9 +48,9 @@ public class Main extends Application {
         usernameTF = new TextField("username");
         passwordTF = new PasswordField();
 
-        partNameTF = new JTextField("Name:");
-        partNumberTF = new JTextField("Part Number:");
-        partQuantityTF = new JTextField("Qty:");
+        partNameTF = new JTextField("Name");
+        partNumberTF = new JTextField("Part Number");
+        partQuantityTF = new JTextField("Qty");
 
         loginButton = new Button("Login");
         createButton = new Button("Create");
@@ -88,49 +95,90 @@ public class Main extends Application {
 // Hash table 256
         class LoginEvent implements EventHandler<ActionEvent>
         {
+            public static byte[] getSHA(String password) throws NoSuchAlgorithmException {
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                return md.digest(password.getBytes(StandardCharsets.UTF_8));
+            }
+
+            public static String toHexString(byte[] hashedPassword) {
+                BigInteger number = new BigInteger(1, hashedPassword);
+
+                StringBuilder hexString = new StringBuilder(number.toString(16));
+
+                while (hexString.length() < 64) {
+                    hexString.insert(0, '0');
+                }
+                return hexString.toString();
+            }
+
+            public static Boolean verifyUser(String username, String password) {
+
+                boolean userValidated = false;
+
+                try {
+                    Scanner sc = new Scanner(new File("C:\\CodeResources\\noShadowFileHere.csv"));
+
+                    while (sc.hasNext() && ! userValidated) {
+                        String line = sc.next();
+                        String[] userParts = line.split(",");
+                        userParts[0] = userParts[0].replace("\uFEFF", "");
+                        if (userParts[0].equals(username) && userParts[1].equals(password)) {
+                            userValidated = true;
+                        }
+                    }
+                }
+                catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(null, "File not found: " + e);
+                }
+                return userValidated;
+            }
+
             @Override
             public void handle(ActionEvent event)
             {
-                if (usernameTF.getText().equals("ZIP") && passwordTF.getText().equals("1234")) {
+                try {
+                    if (verifyUser(usernameTF.getText(), toHexString(getSHA(passwordTF.getText())))) {
 
-                    inventoryTable.setEditable(true);
+                        inventoryTable.setEditable(true);
 
-                    TableColumn partNameColumn = new TableColumn<Inventory, String>("Name");
-                    TableColumn partNumberColumn = new TableColumn<Inventory, Integer>("Part #");
-                    TableColumn partQuantityColumn = new TableColumn<Inventory, Integer>("Quantity");
-//For aesthetics the column width is set to fit the table
-                    partQuantityColumn.setPrefWidth(73.0d);
+                        TableColumn partNameColumn = new TableColumn<Inventory, String>("Name");
+                        TableColumn partNumberColumn = new TableColumn<Inventory, Integer>("Part #");
+                        TableColumn partQuantityColumn = new TableColumn<Inventory, Integer>("Quantity");
+    //For aesthetics the column width is set to fit the table
+                        partQuantityColumn.setPrefWidth(73.0d);
 
-                    partNameColumn.setCellValueFactory(new PropertyValueFactory<Inventory, String>("partName"));
-                    partNumberColumn.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("partNumber"));
-                    partQuantityColumn.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("partQuantity"));
-//Columns are added to the table and then populated with the connect method
-                    inventoryTable.getColumns().addAll(partNameColumn, partNumberColumn, partQuantityColumn);
-                    DatabaseConnection.Connect(inventoryTable);
+                        partNameColumn.setCellValueFactory(new PropertyValueFactory<Inventory, String>("partName"));
+                        partNumberColumn.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("partNumber"));
+                        partQuantityColumn.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("partQuantity"));
+    //Columns are added to the table and then populated with the connect method
+                        inventoryTable.getColumns().addAll(partNameColumn, partNumberColumn, partQuantityColumn);
+                        DatabaseConnection.Connect(inventoryTable);
 
-                    final GridPane gridpane2 = new GridPane();
+                        final GridPane gridpane2 = new GridPane();
 
-                    gridpane2.setHgap(5);
-                    gridpane2.setVgap(5);
-                    gridpane2.setAlignment(Pos.CENTER);
-                    gridpane2.setMinSize(500, 500);
+                        gridpane2.setHgap(5);
+                        gridpane2.setVgap(5);
+                        gridpane2.setAlignment(Pos.CENTER);
+                        gridpane2.setMinSize(500, 500);
 
-                    editMButton.getItems().addAll(createItem, deleteItem);
+                        editMButton.getItems().addAll(createItem, deleteItem);
 
-                    gridpane2.add(appLabel,0,0);
-                    gridpane2.add(searchTF,0,1);
-                    gridpane2.add(inventoryTable,0,2);
-                    gridpane2.add(editMButton,0,4);
-                    gridpane2.add(createButton, 0,5);
+                        gridpane2.add(appLabel,0,0);
+                        gridpane2.add(searchTF,0,1);
+                        gridpane2.add(inventoryTable,0,2);
+                        gridpane2.add(editMButton,0,4);
 
-                    Scene inventoryScene = new Scene(gridpane2);
-                    primaryStage.setScene(inventoryScene);
-                    primaryStage.show();
+                        Scene inventoryScene = new Scene(gridpane2);
+                        primaryStage.setScene(inventoryScene);
+                        primaryStage.show();
 
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Login credentials invalid!");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Login credentials invalid!");
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
@@ -144,6 +192,7 @@ public class Main extends Application {
                 int userOption = createWindow.showConfirmDialog(dialog, createPanel, "Create Item", JOptionPane.OK_CANCEL_OPTION);
 //Print statements were for testing, will add functionality to add data to table.
                 if (userOption == JOptionPane.OK_OPTION) {
+                    DatabaseConnection.CreateRow(partNameTF, partNumberTF, partQuantityTF);
                     System.out.println(partNameTF.getText());
                     System.out.println(partNumberTF.getText());
                     System.out.println(partQuantityTF.getText());
@@ -151,7 +200,7 @@ public class Main extends Application {
 
             }
         }
-        createButton.setOnAction(new CreateEvent());
+        createItem.setOnAction(new CreateEvent());
 
     }
 }

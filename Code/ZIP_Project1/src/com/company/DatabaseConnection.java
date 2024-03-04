@@ -20,11 +20,26 @@ public class DatabaseConnection {
                 partInfo = new Inventory(rs.getString("Name"), rs.getInt("Part_Number"), rs.getInt("Quantity"));
                 inventoryTable.getItems().add(partInfo);
             }
-        } catch (SQLException e) {
+            connectDatabase.close();
+        }
+        catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Database failed to connect!");
-            e.printStackTrace();
         }
         return null;
+    }
+
+    static void CreateRow(JTextField name, JTextField number, JTextField quantity) {
+
+        try {
+            Connection connectDatabase = DriverManager.getConnection("jdbc:sqlite:C:\\CodeResources\\SQLite\\Mechanic_Inventory.db");
+            Statement statement = connectDatabase.createStatement();
+            statement.executeQuery("INSERT INTO inventory (Name, Part_Number, Quantity)" + " VALUES (" + name.getText() + ", " + number.getText() + ", " + quantity.getText() + ")");
+            connectDatabase.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Failed to create row!\nCheck on database.");
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
