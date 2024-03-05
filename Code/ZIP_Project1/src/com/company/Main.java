@@ -27,7 +27,7 @@ public class Main extends Application {
     TextField usernameTF, searchTF;
     JTextField partNameTF, partNumberTF, partQuantityTF, partNumberDeleteTF;
     PasswordField passwordTF;
-    Button loginButton, updateButton, searchButton;
+    Button loginButton, updateButton, searchButton, resetButton;
     MenuButton editMButton;
     Separator separator;
 
@@ -56,6 +56,7 @@ public class Main extends Application {
         loginButton = new Button("Login");
         updateButton = new Button("Update");
         searchButton = new Button("Search");
+        resetButton = new Button("Reset");
         editMButton = new MenuButton("Edit");
         separator = new Separator();
 
@@ -114,8 +115,8 @@ public class Main extends Application {
                 }
                 return hexString.toString();
             }
-
-            public static Boolean verifyUser(String username, String password) {
+//Made non-static to allow catch statement to show "File not found" message in front of GUI.
+            public Boolean verifyUser(String username, String password) {
 
                 boolean userValidated = false;
 
@@ -132,7 +133,7 @@ public class Main extends Application {
                     }
                 }
                 catch (FileNotFoundException e) {
-                    JOptionPane.showMessageDialog(null, "File not found: " + e);
+                    createWindow.showMessageDialog(dialog, "File not found: " + e);
                 }
                 return userValidated;
             }
@@ -170,9 +171,10 @@ public class Main extends Application {
                         gridpane2.add(appLabel,1,0);
                         gridpane2.add(searchTF,1,1);
                         gridpane2.add(inventoryTable,1,2);
-                        gridpane2.add(editMButton,0,4);
+                        gridpane2.add(editMButton,0,3);
                         gridpane2.add(searchButton, 2, 1);
-                        gridpane2.add(updateButton, 2, 4);
+                        gridpane2.add(resetButton, 2, 2);
+                        gridpane2.add(updateButton, 2, 3);
 
                         Scene inventoryScene = new Scene(gridpane2);
                         primaryStage.setScene(inventoryScene);
@@ -181,7 +183,7 @@ public class Main extends Application {
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Login credentials invalid!");
+                        createWindow.showMessageDialog(dialog, "Login credentials invalid!");
                     }
                 } catch (NoSuchAlgorithmException e) {
                     throw new RuntimeException(e);
@@ -219,5 +221,22 @@ public class Main extends Application {
             }
         }
         deleteItem.setOnAction(new DeleteEvent());
+
+        class SearchEvent implements EventHandler<ActionEvent> {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                DatabaseConnection.SearchRows(inventoryTable, searchTF);
+            }
+        }
+        searchButton.setOnAction(new SearchEvent());
+
+        class ResetEvent implements EventHandler<ActionEvent> {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                inventoryTable.getItems().clear();
+                DatabaseConnection.Populate(inventoryTable);
+            }
+        }
+        resetButton.setOnAction(new ResetEvent());
     }
 }

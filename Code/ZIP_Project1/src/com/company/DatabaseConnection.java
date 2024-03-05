@@ -1,6 +1,7 @@
 package com.company;
 
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import javax.swing.*;
 import java.sql.*;
@@ -46,7 +47,42 @@ public class DatabaseConnection {
     }
 
     static void DeleteRow(TableView inventoryTable, JTextField number) {
-        System.out.println("EVERYTHING IS GONE!");
+        try {
+            Connection connectDatabase = DriverManager.getConnection("jdbc:sqlite:C:\\CodeResources\\SQLite\\Mechanic_Inventory.db");
+            Statement statement = connectDatabase.createStatement();
+            statement.executeUpdate("DELETE FROM inventory WHERE Part_Number='" + number.getText() + "'");
+            connectDatabase.close();
+
+//.remove(number) refused to work so we clear and repopulate.
+            inventoryTable.getItems().clear();
+            DatabaseConnection.Populate(inventoryTable);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Delete Failed");
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void SearchRows(TableView inventoryTable, TextField value) {
+
+        Inventory partInfo;
+        try {
+            Connection connectDatabase = DriverManager.getConnection("jdbc:sqlite:C:\\CodeResources\\SQLite\\Mechanic_Inventory.db");
+            Statement statement = connectDatabase.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM inventory WHERE Name LIKE '%" + value.getText() + "%' " + "OR Part_Number LIKE '" + value.getText() + "%' " + "OR Quantity LIKE '%" + value.getText() + "%'");
+
+            inventoryTable.getItems().clear();
+
+            while (rs.next()) {
+                partInfo = new Inventory(rs.getString("Name"), rs.getInt("Part_Number"), rs.getInt("Quantity"));
+                inventoryTable.getItems().add(partInfo);
+            }
+            connectDatabase.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Search Failed!\nMake sure you're inputting integers.");
+            throw new RuntimeException(e);
+        }
     }
 
 }
