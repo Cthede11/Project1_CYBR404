@@ -40,7 +40,7 @@ public class DatabaseConnection {
             inventoryTable.getItems().add(partInfo);
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Failed to create row!\nCheck on database.");
+            JOptionPane.showMessageDialog(null, "Failed to create row!\nInvalid or Duplicate user input.");
             throw new RuntimeException(e);
         }
 
@@ -80,7 +80,7 @@ public class DatabaseConnection {
             connectDatabase.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Search Failed!\nMake sure you're inputting integers.");
+            JOptionPane.showMessageDialog(null,"Search Failed!\nWho knows what you did.");
             throw new RuntimeException(e);
         }
     }

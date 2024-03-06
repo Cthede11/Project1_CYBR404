@@ -251,7 +251,7 @@ public class Main extends Application {
 
                 int userOption = createWindow.showConfirmDialog(dialog, updatePanel, "Update Quantity", JOptionPane.OK_CANCEL_OPTION);
                 if (userOption == JOptionPane.OK_OPTION) {
-                    int confirmUserOption = createWindow.showConfirmDialog(dialog, "Are you sure?", "Confirm Update", JOptionPane.YES_NO_OPTION);
+                    int confirmUserOption = createWindow.showConfirmDialog(dialog, "Are you sure?\n Update quantity to '" + updateQuantity.getText() + "'?", "Confirm Update", JOptionPane.YES_NO_OPTION);
                     DatabaseConnection.UpdateQuantity(updatePartNumber, updateQuantity);
 
                     inventoryTable.getItems().clear();
