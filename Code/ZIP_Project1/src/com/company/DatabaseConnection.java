@@ -85,4 +85,17 @@ public class DatabaseConnection {
         }
     }
 
+    static void UpdateQuantity(JTextField partNumber, JTextField quantity) {
+
+        try {
+            Connection connectDatabase = DriverManager.getConnection("jdbc:sqlite:C:\\CodeResources\\SQLite\\Mechanic_Inventory.db");
+            Statement statement = connectDatabase.createStatement();
+            statement.executeUpdate("UPDATE inventory SET Quantity = '" + quantity.getText() + "' WHERE Part_Number = '" + partNumber.getText() + "'");
+            connectDatabase.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

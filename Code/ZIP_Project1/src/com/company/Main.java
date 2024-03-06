@@ -25,7 +25,7 @@ public class Main extends Application {
 
     Label appLabel;
     TextField usernameTF, searchTF;
-    JTextField partNameTF, partNumberTF, partQuantityTF, partNumberDeleteTF;
+    JTextField partNameTF, partNumberTF, partQuantityTF, partNumberDeleteTF, updatePartNumber, updateQuantity;
     PasswordField passwordTF;
     Button loginButton, updateButton, searchButton, resetButton;
     MenuButton editMButton;
@@ -52,12 +52,14 @@ public class Main extends Application {
         partNumberTF = new JTextField("Part Number");
         partNumberDeleteTF = new JTextField("Part Number");
         partQuantityTF = new JTextField("Qty");
+        updatePartNumber = new JTextField("Part Number");
+        updateQuantity = new JTextField("Qty");
 
         loginButton = new Button("Login");
-        updateButton = new Button("Update");
+        updateButton = new Button("Update Qty");
         searchButton = new Button("Search");
         resetButton = new Button("Reset");
-        editMButton = new MenuButton("Edit");
+        editMButton = new MenuButton("Edit Row");
         separator = new Separator();
 
         JOptionPane createWindow = new JOptionPane();
@@ -69,6 +71,10 @@ public class Main extends Application {
 
         JPanel deletePanel = new JPanel();
         deletePanel.add(partNumberDeleteTF);
+
+        JPanel updatePanel = new JPanel();
+        updatePanel.add(updatePartNumber);
+        updatePanel.add(updateQuantity);
 
         final JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
@@ -214,7 +220,7 @@ public class Main extends Application {
                 int userOption = createWindow.showConfirmDialog(dialog, deletePanel, "Delete Item", JOptionPane.OK_CANCEL_OPTION);
 
                 if (userOption == JOptionPane.OK_OPTION) {
-                    int confirmUserOption = createWindow.showConfirmDialog(dialog, "Are you sure?\nThere WILL BE consequences!", "Confirm Action", JOptionPane.YES_NO_OPTION);
+                    int confirmUserOption = createWindow.showConfirmDialog(dialog, "Are you sure?", "Confirm DELETE?", JOptionPane.YES_NO_OPTION);
                     if (confirmUserOption == JOptionPane.YES_OPTION)
                     DatabaseConnection.DeleteRow(inventoryTable, partNumberDeleteTF);
                 }
@@ -238,5 +244,21 @@ public class Main extends Application {
             }
         }
         resetButton.setOnAction(new ResetEvent());
+
+        class UpdateEvent implements EventHandler<ActionEvent> {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                int userOption = createWindow.showConfirmDialog(dialog, updatePanel, "Update Quantity", JOptionPane.OK_CANCEL_OPTION);
+                if (userOption == JOptionPane.OK_OPTION) {
+                    int confirmUserOption = createWindow.showConfirmDialog(dialog, "Are you sure?", "Confirm Update", JOptionPane.YES_NO_OPTION);
+                    DatabaseConnection.UpdateQuantity(updatePartNumber, updateQuantity);
+
+                    inventoryTable.getItems().clear();
+                    DatabaseConnection.Populate(inventoryTable);
+                 }
+            }
+        }
+        updateButton.setOnAction(new UpdateEvent());
     }
 }
