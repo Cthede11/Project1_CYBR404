@@ -3,7 +3,7 @@ Code [Click Here](Code/ZIP_Project1)
 
 **Planning and Requirements**
 
-- Team Details and Problem Statement [Click Here](Documentation/Team Details and Problem Statement)
+- Team Details and Problem Statement [Click Here](Documentation/Team_Details_and_Problem_Statement)
 - Outcome Summary [Click Here](Documentation/Planning/Outcome_Summary)
 - Executive Summary [Click Here](Documentation/Planning/Executive_Summary)
 - Problem Statement [Click Here](Documentation/Planning/Problem_Statement)
