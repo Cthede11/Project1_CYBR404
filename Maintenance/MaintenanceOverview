@@ -1,0 +1,13 @@
+There are a few spots that require maintenance to be carried out on the Inventory
+Database Application. The biggest is the addition of encryption on the database
+itself, as it wasn’t able to be implemented within our timeframe. This comes with
+its own maintenance, such as changing the encryption key and hashes every so often
+to prevent any potential security breaches. There is also the implementation of
+backup files and weekly reports, further increasing security and displaying all the
+changes made to the system. There is also the option of implementation of multiple
+users, allowing more people to use the database as needed, which would require
+checks to make sure any unauthorized users are found and reported to any
+administrators. Users should take care in protecting their passwords, changing them
+every so often to maximize security, requiring a change password option. Other than
+these stated maintenance options, the system requires relatively few maintenance
+checks.
