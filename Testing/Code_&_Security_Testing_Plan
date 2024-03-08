@@ -1,0 +1,4 @@
+The tests stated in the Code & Security Testing Overview will be implemented by hand.
+Since this is a short project with such a limited time constraint, we cannot create and
+run automated tests in time. We will go through each part and try to find ways to bug
+out the program, and write down the methods and results of each test.
