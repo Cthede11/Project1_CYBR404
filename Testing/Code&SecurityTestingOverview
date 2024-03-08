@@ -1,0 +1,6 @@
+The tests that need to be carried out are validation and authorization tests on the
+login screen (can they inject anything, if they enter the right username and password
+are they accepted, if any inputs are wrong will it decline, etc.). We will also need to
+run validation tests on the creation of items, the update of item quantities, and the
+deletion of items (does it make/update/delete the correct item, will it prevent any
+copies of items, can it detect injections, etc.).
