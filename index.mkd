@@ -15,18 +15,19 @@ Code [Click Here](Code/ZIP_Project1)
 
 **Design and Implementation**
 
-Executive Design [Click Here](Documentation/Design/Executive Design)
-Security Design [Click Here](Documentation/Design/Security Design)
-Level 0 DFD [Click Here](Documentation/Design/Diagrams/Level 0 DFD.jpg)
-Level 1 DFD [Click Here](Documentation/Design/Diagrams/Level 1 DFD.jpg)
-Use Case Diagram [Click Here](Documentation/Design/Diagrams/UML_UseCase.jpg)
-UML Class Diagram [Click Here](Documentation/Design/Diagrams/UML Class.jpg)
+- Executive Design [Click Here](Documentation/Design/Executive Design)
+- Security Design [Click Here](Documentation/Design/Security Design)
+- Level 0 DFD [Click Here](Documentation/Design/Diagrams/Level 0 DFD.jpg)
+- Level 1 DFD [Click Here](Documentation/Design/Diagrams/Level 1 DFD.jpg)
+- Use Case Diagram [Click Here](Documentation/Design/Diagrams/UML_UseCase.jpg)
+- UML Class Diagram [Click Here](Documentation/Design/Diagrams/UML Class.jpg)
 
 
 **Implementation, Testing, and Maintenance**
 
-Maintenance Overview [Click Here](Maintenance/MaintenanceOverview)
-Maintenance Timeline [Click Here](Maintenance/MaintenanceTimeline)
-Testing Review [Click Here](Testing/Code&SecurityTestingOverview)
-Testing Plan [Click Here](Testing/Code&SecurityTestingPlan)
-Testing Results [Click Here](Testing/Code&SecurityTestingResults)
+- Maintenance Overview [Click Here](Maintenance/MaintenanceOverview)
+- Maintenance Timeline [Click Here](Maintenance/MaintenanceTimeline)
+- Testing Review [Click Here](Testing/Code&SecurityTestingOverview)
+- Testing Plan [Click Here](Testing/Code&SecurityTestingPlan)
+- Testing Results [Click Here](Testing/Code&SecurityTestingResults)
+
