@@ -1,0 +1,10 @@
+In reality, the timeline for this maintenance is extremely short. Since we will
+not be supporting the application after the 3 weeks, the timeline is really what
+the customer would be willing to pay. But if we were to continue supporting this
+for a time, such as a couple years, the timeline would go something like this:
+for 2 weeks would be the inplementation and testing of encryption on the database
+and finishing the scrubbing for inputs. Then would be the backup files and reports,
+which would take an additional 2 weeks. After that would be the addition of multiple
+users and the changing of passwords, another 3 weeks. After that, general maintenance
+such as changing of encryption keys and hashes would be monthly, for about 2-3 years
+or until the application is no longer used.
