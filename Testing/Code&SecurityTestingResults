@@ -1,1 +1,52 @@
+LoginTest              |Correct Username   |Incorrect Username|
+-----------------------|-------------------|------------------|
+Correct Password       | Grants Access     | Denies Access    |	
+Incorrect Password     | Denies Access     | Denies Access    |
+______________________________________________________________|
+
+			
+CreateRowTests         |Int for Quantity |String for Quantity |
+-----------------------|-----------------|--------------------|
+Unique Part Number     |Creates Row      |Invalid UI Window   |
+Duplicate Part Number  |Invalid UI Window|Invalid UI Window   |
+______________________________________________________________|
+
+                       |Int for Quantity |String for Quantity |
+-----------------------|-----------------|--------------------|
+Int for Part Number    |Creates Row      |Invalid UI Window   |
+String for Part Number |Invalid UI Window|Invalid UI Window   |
+______________________________________________________________|
+
+                       | Int for Quantity|String for Quantity |
+-----------------------|-----------------|--------------------|
+Part Number length<6   |Invalid UI Window|Invalid UI Window   |
+Part Number length>6   |Invalid UI Window|Invalid UI Window   |
+Part_Number length=6   |Creates Row      |Invalid UI Window   |
+______________________________________________________________|
+
+			
+DeleteRowTests         |(Deletes by Part#) | *Requires double confirmation
+-----------------------|-------------------|
+Part Number length<6   |Invalid UI Window  |
+Part Number length>6   |Invalid UI Window  |
+Part_Number length=6   |Deletes Row        |
+Nonexistant Part       |Nothing is removed |
+___________________________________________|
+			
+SearchTest             |Partial String Given|
+-----------------------|--------------------|
+Integer value          |Finds if in database|	
+String value           |Finds if in database|
+____________________________________________|
+			
+ResetButtonTests       |Filtered Table      |
+-----------------------|--------------------|
+Button Press           |Resets Table        |
+_______________________|____________________|
+			
+UpdateButtonTests      |int for new Quantity |String for new Quantity |	*Requires double confirmation
+-----------------------|---------------------|------------------------|
+int for Part Number    |Updates Quantity     |Invalid UI Window       |
+String for Part Number |Invalid UI Window    |Invalid UI Window       |
+______________________________________________________________________|
 
