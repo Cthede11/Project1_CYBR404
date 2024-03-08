@@ -25,7 +25,7 @@ Part_Number length=6   |Creates Row      |Invalid UI Window   |
 ______________________________________________________________|
 
 			
-DeleteRowTests         |(Deletes by Part#) | *Requires double confirmation
+DeleteRowTest          |(Deletes by Part#) | *Requires double confirmation
 -----------------------|-------------------|
 Part Number length<6   |Invalid UI Window  |
 Part Number length>6   |Invalid UI Window  |
@@ -39,12 +39,12 @@ Integer value          |Finds if in database|
 String value           |Finds if in database|
 ____________________________________________|
 			
-ResetButtonTests       |Filtered Table      |
+ResetButtonTest        |Filtered Table      |
 -----------------------|--------------------|
 Button Press           |Resets Table        |
 _______________________|____________________|
 			
-UpdateButtonTests      |int for new Quantity |String for new Quantity |	*Requires double confirmation
+UpdateButtonTest       |int for new Quantity |String for new Quantity |	*Requires double confirmation
 -----------------------|---------------------|------------------------|
 int for Part Number    |Updates Quantity     |Invalid UI Window       |
 String for Part Number |Invalid UI Window    |Invalid UI Window       |
